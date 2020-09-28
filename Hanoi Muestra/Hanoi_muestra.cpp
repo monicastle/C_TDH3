@@ -4,8 +4,6 @@ WINDOW *ventanaTorres;
 WINDOW *ventanaAguja1;
 WINDOW *ventanaAguja2;
 WINDOW *ventanaAguja3;
-//void TorresDeHanoi(int, int, int);
-void MoverDiscos();
 int main(){
     int MaxY, MaxX, TorreX, TorreY;
     initscr();
@@ -73,10 +71,6 @@ int main(){
     wbkgd(ventanaAguja2, COLOR_PAIR(1));
     wbkgd(ventanaAguja3, COLOR_PAIR(1));
     box(ventana, ACS_VLINE, ACS_HLINE);
-    //box(ventanaTorres, ACS_VLINE, ACS_HLINE);
-    //box(ventanaAguja1, ACS_VLINE, ACS_HLINE);
-    //box(ventanaAguja2, ACS_VLINE, ACS_HLINE);
-    //box(ventanaAguja3, ACS_VLINE, ACS_HLINE);
     double centro1, centro2, centro3, centro4, centro5, centro6;
     centro1 = (MaxX / 2) - 15.5;
     centro2 = (MaxX / 2) - 16.5;
@@ -151,11 +145,8 @@ int main(){
     touchwin(ventanaAguja2);
     wrefresh(ventanaAguja2);
     touchwin(ventanaAguja3);
-    wrefresh(ventanaAguja3);
-        //getchar();
-        tecla = getch();
-        //getchar();
-        //endwin(); 
+    wrefresh(ventanaAguja3);;
+    tecla = getch();
     }
     endwin(); 
     for (int i = 0; i < numdisc; i++){
@@ -172,85 +163,3 @@ int main(){
     delete[] mAguja3;
     return 0;
 } // Fin Main
-
-/*void TorresDeHanoi(int numdisc, int maxY, int maxX){
-
-    int cont = 3;
-    for (int i = 1; i < numdisc; i++){
-        cont = cont + 2;
-    } // Fin For
-    int** mAguja1 = new int*[numdisc];
-    for (int i = 0; i < numdisc; i++){
-        mAguja1[i] = new int[cont];
-    } // Fin For
-    int** mAguja2 = new int*[numdisc];
-    for (int i = 0; i < numdisc; i++){
-        mAguja2[i] = new int[cont];
-    } // Fin For
-    int** mAguja3 = new int*[numdisc];
-    for (int i = 0; i < numdisc; i++){
-        mAguja3[i] = new int[cont];
-    } // Fin For
-    int izquierda, derecha;
-    izquierda = 0;
-    derecha = cont - 1;
-    for (int i = numdisc - 1; i >= 0; i--){
-        for (int j = 0; j < cont; j++){
-            if (j >= izquierda && j <= derecha){
-                mAguja1[i][j] = 0;
-            } else {
-                mAguja1[i][j] = 1;
-            }// Fin If          
-        } // Fin For
-        izquierda++;
-        derecha--;       
-    } // Fin For
-
-    int y, x, mitad;
-    y = maxY - numdisc;
-    mitad = cont / 2;
-    x = 13 - mitad;
-    start_color();
-    init_pair(2, COLOR_WHITE, COLOR_BLACK);
-    ventanaAguja1 = newwin(numdisc, cont, y, x);
-    wbkgd(ventanaAguja1, COLOR_PAIR(2));
-    box(ventanaAguja1, ACS_VLINE, ACS_HLINE);
-    for (int i = 0; i < numdisc; i++){
-        for (int j = 0; j < cont; j++){
-            if (mAguja1[i][j] == 0){
-                cout << "0";              
-            } else {
-                cout << " ";
-            } // Fin If         
-        } // Fin For
-        cout << endl;
-    } // Fin For
-
-
-    for (int i = 0; i < numdisc; i++){
-        delete[] mAguja1[i];
-    } // Fin For
-    delete[] mAguja1;
-    for (int i = 0; i < numdisc; i++){
-        delete[] mAguja2[i];
-    } // Fin For
-    delete[] mAguja2;
-    for (int i = 0; i < numdisc; i++){
-        delete[] mAguja3[i];
-    } // Fin For
-    delete[] mAguja3;    
-} // Fin Torres de Hanoi*/
-
-void MoverDiscos(){
-
-}
-void TorresHanoi(int NumDiscos, int AgujaInicial, int AgujaTemporal, int AgujaDestino, int** m_Aguja1, int** m_Aguja2, int** m_Aguja3){
-    if (NumDiscos == 1){
-        // Caso Base
-        cout << AgujaInicial << " -> " << AgujaTemporal << endl;
-    } else {
-        TorresHanoi(NumDiscos - 1, AgujaInicial, AgujaDestino, AgujaTemporal, m_Aguja1, m_Aguja2, m_Aguja3);
-        cout << AgujaInicial << " -> " << AgujaTemporal << endl;
-        TorresHanoi(NumDiscos - 1, AgujaDestino, AgujaTemporal, AgujaInicial);
-    } // Fin If
-} // Fin Torres de Hanoi
